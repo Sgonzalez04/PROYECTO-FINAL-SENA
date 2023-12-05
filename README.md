@@ -280,7 +280,42 @@ CREATE TABLE Dicta (
         ('Terminado', 10, 30),
         ('Terminado', 11, 31),
         ('Terminado', 11, 32);
-
++--------------+-----------+-------------+---------------------+
+| id_matricula | Estado    | id_aprendiz | id_ruta_aprendizaje |
++--------------+-----------+-------------+---------------------+
+|           33 | Activo    |           1 |                   1 |
+|           34 | Activo    |           1 |                   2 |
+|           35 | Activo    |           1 |                   3 |
+|           36 | Activo    |           1 |                   4 |
+|           37 | Activo    |           2 |                   5 |
+|           38 | Activo    |           2 |                   6 |
+|           39 | Activo    |           2 |                   7 |
+|           40 | Activo    |           2 |                   8 |
+|           41 | Cancelado |           3 |                   9 |
+|           42 | Cancelado |           3 |                  10 |
+|           43 | Cancelado |           3 |                  11 |
+|           44 | Activo    |           4 |                  12 |
+|           45 | Activo    |           4 |                  13 |
+|           46 | Activo    |           4 |                  14 |
+|           47 | Activo    |           5 |                  15 |
+|           48 | Activo    |           5 |                  16 |
+|           49 | Activo    |           5 |                  17 |
+|           50 | Terminado |           6 |                  18 |
+|           51 | Terminado |           6 |                  19 |
+|           52 | Terminado |           6 |                  20 |
+|           53 | Terminado |           7 |                  21 |
+|           54 | Terminado |           7 |                  22 |
+|           55 | Terminado |           7 |                  23 |
+|           56 | Terminado |           8 |                  24 |
+|           57 | Terminado |           8 |                  25 |
+|           58 | Cancelado |           9 |                  26 |
+|           59 | Cancelado |           9 |                  27 |
+|           60 | Cancelado |           9 |                  28 |
+|           61 | Terminado |          10 |                  29 |
+|           62 | Terminado |          10 |                  30 |
+|           63 | Terminado |          11 |                  31 |
+|           64 | Terminado |          11 |                  32 |
++--------------+-----------+-------------+---------------------+
     ~~~
 ***
 #### 2. Agregue a el campo edad a la tabla de Aprendices.
