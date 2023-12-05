@@ -337,12 +337,9 @@
 #### 9.Genere un listado de los aprendices matriculados en el curso “Bases de Datos Relacionales”.
     ```sql
     SELECT A.nom_aprendiz
-    FROM Aprendiz A
-    JOIN Matricula M ON A.id_Aprendiz = M.id_aprendiz
-    JOIN RutaDeAprendizaje RDA ON M.id_ruta_aprendizaje = RDA.id_ruta_aprendizaje
-    JOIN Contiene C ON RDA.id_ruta_aprendizaje = C.id_ruta_aprendizaje
-    JOIN Curso Cur ON C.id_curso = Cur.id_Curso
-    WHERE Cur.nom_curso = 'Bases de Datos Relacionales';
+    FROM aprendiz A
+    JOIN rutadeaprendizaje RDA ON A.id_Aprendiz = RDA.id_aprendiz
+    WHERE RDA.titulo = 'Tecnólogo en Bases de Datos Relacionales';
     ~~~
 ***
 #### 10.Nombres de Instructores que no tienen curso asignado.
