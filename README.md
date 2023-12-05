@@ -280,6 +280,8 @@ CREATE TABLE Dicta (
         ('Terminado', 10, 30),
         ('Terminado', 11, 31),
         ('Terminado', 11, 32);
+
+    RESPUESTA
     +--------------+-----------+-------------+---------------------+
     | id_matricula | Estado    | id_aprendiz | id_ruta_aprendizaje |
     +--------------+-----------+-------------+---------------------+
@@ -324,6 +326,23 @@ CREATE TABLE Dicta (
     ADD COLUMN edad INT;
     UPDATE Aprendiz
     SET edad = 20;
+
+    RESPUESTA
+    +-------------+--------------------------------+--------------+------+
+    | id_Aprendiz | nom_aprendiz                   | id_matricula | edad |
+    +-------------+--------------------------------+--------------+------+
+    |           1 | Carlos Saúl Gómez              |            1 |   20 |
+    |           2 | Leyla María Delgado Vargas     |            1 |   20 |
+    |           3 | Juan José Cardona              |            2 |   20 |
+    |           4 | Sergio Augusto Contreras Navas |            1 |   20 |
+    |           5 | Ana María Velázquez Parra      |            1 |   20 |
+    |           6 | Gustavo Noriega Alzate         |            3 |   20 |
+    |           7 | Pedro Nell Gómez Díaz          |            3 |   20 |
+    |           8 | Jairo Augusto Castro Camargo   |            3 |   20 |
+    |           9 | Henry Soler Vega               |            2 |   20 |
+    |          10 | Antonio Cañate Cortés          |            3 |   20 |
+    |          11 | Daniel Simancas Junior         |            3 |   20 |
+    +-------------+--------------------------------+--------------+------+
 ~~~
 ***
 #### 3. Si suponemos que los cursos tienen una duración diferente dependiendo de la ruta que lo contenga ¿qué modificación haría a la estructura de datos ya planteada?
@@ -331,6 +350,32 @@ CREATE TABLE Dicta (
     ~~~sql
     ALTER TABLE Curso
     ADD COLUMN duracion_curso INT;
+    
+    RESPUESTA
+    +----------+---------------------------------+----------------+
+    | id_Curso | nom_curso                       | duracion_curso |
+    +----------+---------------------------------+----------------+
+    |        1 | Matemáticas Básicas             |           NULL |
+    |        2 | Álgebra Computacional           |           NULL |
+    |        3 | Programación Básica             |           NULL |
+    |        4 | Inglés                          |           NULL |
+    |        5 | Electrónica Básica              |           NULL |
+    |        6 | Motor de Cuatro Tiempos         |           NULL |
+    |        7 | Enfermedades Laborales          |           NULL |
+    |        8 | Higiene Postural en el Trabajo  |           NULL |
+    |        9 | Ergonomía                       |           NULL |
+    |       10 | Legislación Laboral en Colombia |           NULL |
+    |       11 | Materiales de Soldadura         |           NULL |
+    |       12 | Métodos de Solda Soldadura ura  |           NULL |
+    |       13 | Fusión de Metale Soldadura      |           NULL |
+    |       14 | Buceo 1                         |           NULL |
+    |       15 | Buceo 2                         |           NULL |
+    |       16 | Riesgo Eléctrico                |           NULL |
+    |       17 | Bases de Datos Relacionales     |           NULL |
+    |       18 | Bases de Datos NO Relacionales  |           NULL |
+    |       19 | Electrónica Digital             |           NULL |
+    |       20 | Microprocesadores               |           NULL |
+    +----------+---------------------------------+----------------+
     ~~~
 ***
 
@@ -342,6 +387,23 @@ CREATE TABLE Dicta (
     INNER JOIN RutaDeAprendizaje R ON M.id_ruta_aprendizaje = R.id_ruta_aprendizaje
     INNER JOIN Carrera C ON R.id_carrera = C.id_carrera
     WHERE C.nom_carrera = 'Electrónica';
+
+    RESPUESTA
+    +------------------------------+------+
+    | nom_aprendiz                 | edad |
+    +------------------------------+------+
+    | Gustavo Noriega Alzate       |   20 |
+    | Gustavo Noriega Alzate       |   20 |
+    | Gustavo Noriega Alzate       |   20 |
+    | Pedro Nell Gómez Díaz        |   20 |
+    | Pedro Nell Gómez Díaz        |   20 |
+    | Pedro Nell Gómez Díaz        |   20 |
+    | Jairo Augusto Castro Camargo |   20 |
+    | Jairo Augusto Castro Camargo |   20 |
+    | Henry Soler Vega             |   20 |
+    | Henry Soler Vega             |   20 |
+    | Henry Soler Vega             |   20 |
+    +------------------------------+------+
     ~~~
 ***
 
@@ -352,6 +414,18 @@ CREATE TABLE Dicta (
     INNER JOIN Matricula M ON A.id_Aprendiz = M.id_aprendiz
     INNER JOIN RutaDeAprendizaje R ON M.id_ruta_aprendizaje = R.id_ruta_aprendizaje
     WHERE M.Estado = 'Cancelado';
+
+    RESPUESTA
+    +-------------------+----------------------+
+    | nom_aprendiz      | nom_ruta_aprendizaje |
+    +-------------------+----------------------+
+    | Juan José Cardona | Videojuegos          |
+    | Juan José Cardona | Videojuegos          |
+    | Juan José Cardona | Videojuegos          |
+    | Henry Soler Vega  | Robótica             |
+    | Henry Soler Vega  | Robótica             |
+    | Henry Soler Vega  | Robótica             |
+    +-------------------+----------------------+
     ~~~
 ***
 #### 6. Seleccionar Nombre de los cursos que no tienen un instructor asignado.
@@ -359,6 +433,13 @@ CREATE TABLE Dicta (
     SELECT nom_curso
     FROM Curso
     WHERE id_Curso NOT IN (SELECT id_curso FROM Dicta);
+
+    RESPUESTA
+    +-----------+
+    | nom_curso |
+    +-----------+
+    | Buceo 1   |
+    +-----------+
     ~~~
 ***
 #### 7. Seleccionar Nombres de los instructores que dictan cursos en la ruta de aprendizaje “Sistemas de Información Empresariales”.
@@ -369,6 +450,18 @@ CREATE TABLE Dicta (
     JOIN Instructor I ON D.id_instructor = I.id_instructor
     JOIN RutaDeAprendizaje R ON C.id_Curso = R.id_ruta_aprendizaje
     WHERE R.nom_ruta_aprendizaje = 'Sistemas de Información Empresariales';
+
+    RESPUESTA
+    +------------------------+
+    | nom_instructor         |
+    +------------------------+
+    | Ricardo Vicente Jaimes |
+    | Marinela Narvaez       |
+    | Agustín Parra Granados |
+    | Roy Hernando Llamas    |
+    | Maria Jimena Monsalve  |
+    | Nelson Raúl Buitrago   |
+    +------------------------+
     ~~~
 ***
 #### 8. Genere un listado de todos los aprendices que terminaron una Carrera mostrando el nombre del profesional, el nombre de la carrera y el énfasis de la carrera (Nombre de la Ruta de aprendizaje)
@@ -379,6 +472,24 @@ CREATE TABLE Dicta (
     INNER JOIN RutaDeAprendizaje R ON M.id_ruta_aprendizaje = R.id_ruta_aprendizaje
     INNER JOIN Carrera C ON R.id_carrera = C.id_carrera
     WHERE M.Estado = 'Terminado';
+
+    RESPUESTA
+    +------------------------------+-------------+----------------------+
+    | nom_aprendiz                 | nom_carrera | nom_ruta_aprendizaje |
+    +------------------------------+-------------+----------------------+
+    | Gustavo Noriega Alzate       | Electrónica | Microcontroladores   |
+    | Gustavo Noriega Alzate       | Electrónica | Microcontroladores   |
+    | Gustavo Noriega Alzate       | Electrónica | Microcontroladores   |
+    | Pedro Nell Gómez Díaz        | Electrónica | Microcontroladores   |
+    | Pedro Nell Gómez Díaz        | Electrónica | Microcontroladores   |
+    | Pedro Nell Gómez Díaz        | Electrónica | Microcontroladores   |
+    | Jairo Augusto Castro Camargo | Electrónica | Robótica             |
+    | Jairo Augusto Castro Camargo | Electrónica | Robótica             |
+    | Antonio Cañate Cortés        | Soldadura   | Soldadura Eléctrica  |
+    | Antonio Cañate Cortés        | Soldadura   | Soldadura Eléctrica  |
+    | Daniel Simancas Junior       | Soldadura   | Soldadura Autógena   |
+    | Daniel Simancas Junior       | Soldadura   | Soldadura Autógena   |
+    +------------------------------+-------------+----------------------+
     ~~~
 ***
 #### 9.Genere un listado de los aprendices matriculados en el curso “Bases de Datos Relacionales”.
@@ -389,6 +500,14 @@ CREATE TABLE Dicta (
     JOIN contiene C ON C.id_ruta_aprendizaje = RDA.id_ruta_aprendizaje
     JOIN curso CUR ON CUR.id_Curso = C.id_curso
     WHERE Cur.nom_curso = 'Bases de Datos Relacionales';
+
+    RESPUESTA
+    +---------------------------+
+    | nom_aprendiz              |
+    +---------------------------+
+    | Carlos Saúl Gómez         |
+    | Ana María Velázquez Parra |
+    +---------------------------+
     ~~~
 ***
 #### 10.Nombres de Instructores que no tienen curso asignado.
@@ -396,6 +515,14 @@ CREATE TABLE Dicta (
     SELECT nom_instructor
     FROM Instructor
     WHERE id_instructor NOT IN (SELECT DISTINCT id_instructor FROM Dicta);
+
+    RESPUESTA
+    +-----------------------+
+    | nom_instructor        |
+    +-----------------------+
+    | Pedro Nell Santamaría |
+    | Andrea González       |
+    +-----------------------+
     ~~~
 ***
 
