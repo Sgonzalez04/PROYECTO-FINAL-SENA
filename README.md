@@ -1,4 +1,7 @@
 # PROYECTO-FINAL-SENA
+## SENA_PROYECTO
+### Sergio Alejandro Gonzalez Silva
+### GRUPO R4
 ***
 #### MODELO ENTIDAD RELACION
 ![modelo_entidad_relacion](Diagrama_entidad_relacion_SENA.png)
@@ -64,17 +67,9 @@
       FOREIGN KEY (id_curso) REFERENCES Curso(id_Curso),
       FOREIGN KEY (id_instructor) REFERENCES Instructor(id_instructor)
   );
-  
-  CREATE TABLE Estado_Matricula (
-      id_matricula INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-      Estado VARCHAR(50) NOT NULL,
-      id_aprendiz BIGINT UNSIGNED NOT NULL,
-      id_ruta_aprendizaje BIGINT UNSIGNED NOT NULL,
-      FOREIGN KEY (id_aprendiz, id_ruta_aprendizaje) REFERENCES RutaDeAprendizaje(id_aprendiz, id_ruta_aprendizaje)
-  );
-
+~~~
 #### Poblar la base de datos:
-~~~sql
+    ~~~sql
     --Cursos
     INSERT INTO Curso (id_Curso, nom_curso)
     VALUES
@@ -244,49 +239,13 @@
     (15, 12),
     (15, 13),
     (15, 14);
-    
-    ***
-    --MATRICULA
-    INSERT INTO Matricula (Estado, id_aprendiz, id_ruta_aprendizaje)
-    VALUES
-    ('Activo', 1, 1),
-    ('Activo', 1, 2),
-    ('Activo', 1, 3),
-    ('Activo', 1, 4),
-    ('Activo', 2, 5),
-    ('Activo', 2, 6),
-    ('Activo', 2, 7),
-    ('Activo', 2, 8),
-    ('Cancelado', 3, 9),
-    ('Cancelado', 3, 10),
-    ('Cancelado', 3, 11),
-    ('Activo', 4, 12),
-    ('Activo', 4, 13),
-    ('Activo', 4, 14),
-    ('Activo', 5, 15),
-    ('Activo', 5, 16),
-    ('Activo', 5, 17),
-    ('Terminado', 6, 18),
-    ('Terminado', 6, 19),
-    ('Terminado', 6, 20),
-    ('Terminado', 7, 21),
-    ('Terminado', 7, 22),
-    ('Terminado', 7, 23),
-    ('Terminado', 8, 24),
-    ('Terminado', 8, 25),
-    ('Cancelado', 9, 26),
-    ('Cancelado', 9, 27),
-    ('Terminado', 10, 28),
-    ('Terminado', 10, 29),
-    ('Terminado', 11, 30),
-    ('Terminado', 11, 31);
-    
+    ~~~
 ***
 ### CONSULTAS
 ***
 #### 1. Agregue un campo Estado_Matrícula a la tabla Matrícula que indique si el estudiante se encuentra “En Ejecución”, “Terminado” o “Cancelado”
-~~~sql
-ALTER TABLE Matriculas
+    ~~~sql
+    ALTER TABLE Matriculas
     ADD COLUMN estado_matricula VARCHAR(24) NOT NULL;
 
     INSERT INTO Matriculas(estado_matricula)
@@ -310,4 +269,86 @@ ALTER TABLE Matriculas
     UPDATE Aprendices
     SET id_matricula = 3
     WHERE id_aprendiz IN (6,7,8,10,11);
+    ~~~
+***
+#### 2. Agregue a el campo edad a la tabla de Aprendices.
+~~~sql
+    ALTER TABLE aprendiz
+    ADD COLUMN edad INT;
+    UPDATE Aprendiz
+    SET edad = 20;
 ~~~
+***
+#### 3. Si suponemos que los cursos tienen una duración diferente dependiendo de la ruta que lo contenga ¿qué modificación haría a la estructura de datos ya planteada?
+#### RESPUESTA:agregar una columna llamada duracion_Curso a la tabla Curso y se toma por numero de semanas.
+    ~~~sql
+    ALTER TABLE Curso
+    ADD COLUMN duracion_curso INT;
+    ~~~
+***
+
+#### 4.Seleccionar los nombres y edades de aprendices que están cursando la carrera de electrónica.
+    ~~~sql
+    SELECT A.nom_aprendiz, A.edad
+    FROM Aprendiz A
+    INNER JOIN Matricula M ON A.id_aprendiz = M.id_aprendiz
+    INNER JOIN RutaDeAprendizaje R ON M.id_ruta_aprendizaje = R.id_ruta_aprendizaje
+    INNER JOIN Carrera C ON R.id_carrera = C.id_carrera
+    WHERE C.nom_carrera = 'Electrónica';
+    ~~~
+***
+
+#### 5. Seleccionar Nombres de Aprendices junto al nombre de la ruta de aprendizaje que cancelaron.
+    ~~~sql
+    SELECT A.nom_aprendiz, R.nom_ruta_aprendizaje
+    FROM aprendiz A
+    INNER JOIN Matricula M ON A.id_aprendiz = M.id_aprendiz
+    INNER JOIN RutaDeAprendizaje R ON M.id_ruta_aprendizaje = R.id_ruta_aprendizaje
+    WHERE M.Estado_Matricula = 'Cancelado';
+    ~~~
+***
+#### 6. Seleccionar Nombre de los cursos que no tienen un instructor asignado.
+    ```sql
+    SELECT nom_curso
+    FROM Curso
+    WHERE id_Curso NOT IN (SELECT id_curso FROM Dicta);
+    ~~~
+***
+#### 7. Seleccionar Nombres de los instructores que dictan cursos en la ruta de aprendizaje “Sistemas de Información Empresariales”.
+    ```sql
+    SELECT DISTINCT I.nom_instructor
+    FROM Dicta D
+    JOIN Curso C ON D.id_curso = C.id_Curso
+    JOIN Instructor I ON D.id_instructor = I.id_instructor
+    JOIN RutaDeAprendizaje R ON C.id_Curso = R.id_ruta_aprendizaje
+    WHERE R.nom_ruta_aprendizaje = 'Sistemas de Información Empresariales';
+    ~~~
+***
+#### 8. Genere un listado de todos los aprendices que terminaron una Carrera mostrando el nombre del profesional, el nombre de la carrera y el énfasis de la carrera (Nombre de la Ruta de aprendizaje)
+    ```sql
+    SELECT A.nom_aprendiz, Carr.nom_carrera, RDA.nom_ruta_aprendizaje
+    FROM Aprendiz A
+    JOIN Matricula M ON A.id_Aprendiz = M.id_aprendiz
+    JOIN RutaDeAprendizaje RDA ON M.id_ruta_aprendizaje = RDA.id_ruta_aprendizaje
+    JOIN Carrera Carr ON RDA.id_carrera = Carr.id_carrera
+    WHERE M.`Estado_Matricula` = 'Terminado';
+    ~~~
+***
+#### 9.Genere un listado de los aprendices matriculados en el curso “Bases de Datos Relacionales”.
+    ```sql
+    SELECT A.nom_aprendiz
+    FROM Aprendiz A
+    JOIN Matricula M ON A.id_Aprendiz = M.id_aprendiz
+    JOIN RutaDeAprendizaje RDA ON M.id_ruta_aprendizaje = RDA.id_ruta_aprendizaje
+    JOIN Contiene C ON RDA.id_ruta_aprendizaje = C.id_ruta_aprendizaje
+    JOIN Curso Cur ON C.id_curso = Cur.id_Curso
+    WHERE Cur.nom_curso = 'Bases de Datos Relacionales';
+    ~~~
+***
+#### 10.Nombres de Instructores que no tienen curso asignado.
+    ```sql
+    SELECT nom_instructor
+    FROM Instructor
+    WHERE id_instructor NOT IN (SELECT DISTINCT id_instructor FROM Dicta);
+    ~~~
+***
