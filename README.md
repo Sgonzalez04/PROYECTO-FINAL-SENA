@@ -351,30 +351,33 @@ CREATE TABLE Dicta (
     ALTER TABLE Curso
     ADD COLUMN duracion_curso INT;
     
+    UPDATE curso
+    SET duracion_curso = 2;
+    
     RESPUESTA
     +----------+---------------------------------+----------------+
     | id_Curso | nom_curso                       | duracion_curso |
     +----------+---------------------------------+----------------+
-    |        1 | Matemáticas Básicas             |           NULL |
-    |        2 | Álgebra Computacional           |           NULL |
-    |        3 | Programación Básica             |           NULL |
-    |        4 | Inglés                          |           NULL |
-    |        5 | Electrónica Básica              |           NULL |
-    |        6 | Motor de Cuatro Tiempos         |           NULL |
-    |        7 | Enfermedades Laborales          |           NULL |
-    |        8 | Higiene Postural en el Trabajo  |           NULL |
-    |        9 | Ergonomía                       |           NULL |
-    |       10 | Legislación Laboral en Colombia |           NULL |
-    |       11 | Materiales de Soldadura         |           NULL |
-    |       12 | Métodos de Solda Soldadura ura  |           NULL |
-    |       13 | Fusión de Metale Soldadura      |           NULL |
-    |       14 | Buceo 1                         |           NULL |
-    |       15 | Buceo 2                         |           NULL |
-    |       16 | Riesgo Eléctrico                |           NULL |
-    |       17 | Bases de Datos Relacionales     |           NULL |
-    |       18 | Bases de Datos NO Relacionales  |           NULL |
-    |       19 | Electrónica Digital             |           NULL |
-    |       20 | Microprocesadores               |           NULL |
+    |        1 | Matemáticas Básicas             |              2 |
+    |        2 | Álgebra Computacional           |              2 |
+    |        3 | Programación Básica             |              2 |
+    |        4 | Inglés                          |              2 |
+    |        5 | Electrónica Básica              |              2 |
+    |        6 | Motor de Cuatro Tiempos         |              2 |
+    |        7 | Enfermedades Laborales          |              2 |
+    |        8 | Higiene Postural en el Trabajo  |              2 |
+    |        9 | Ergonomía                       |              2 |
+    |       10 | Legislación Laboral en Colombia |              2 |
+    |       11 | Materiales de Soldadura         |              2 |
+    |       12 | Métodos de Solda Soldadura ura  |              2 |
+    |       13 | Fusión de Metale Soldadura      |              2 |
+    |       14 | Buceo 1                         |              2 |
+    |       15 | Buceo 2                         |              2 |
+    |       16 | Riesgo Eléctrico                |              2 |
+    |       17 | Bases de Datos Relacionales     |              2 |
+    |       18 | Bases de Datos NO Relacionales  |              2 |
+    |       19 | Electrónica Digital             |              2 |
+    |       20 | Microprocesadores               |              2 |
     +----------+---------------------------------+----------------+
     ~~~
 ***
