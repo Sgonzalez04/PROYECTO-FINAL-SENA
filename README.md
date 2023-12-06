@@ -552,7 +552,7 @@ CREATE TABLE Dicta (
     Respuesta correcta: b) Ordenar filas en un conjunto de resultados
 
 #### Pregunta 3: 
-¿Cuál es la operación utilizada para combinar múltiples condiciones en una consulta?
+¿Cuál es la operación utilizada para combinar múltiples condiciones en una consulta si ambas son verdaderas?
     
     a) OR
     b) XOR
