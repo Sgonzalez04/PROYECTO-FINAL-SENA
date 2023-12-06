@@ -105,7 +105,7 @@ CREATE TABLE Dicta (
     (1, 'Ricardo Vicente Jaimes', 'Sistemas'),
     (2, 'Marinela Narvaez', 'Salud Ocupacional'),
     (3, 'Agustín Parra Granados', 'Soldadura'),
-    (4, 'Nelson Raúl Buitr Soldadura go', 'Mecánica'),
+    (4, 'Nelson Raúl Buitrego', 'Mecánica'),
     (5, 'Roy Hernando Llamas', 'Inglés'),
     (6, 'Maria Jimena Monsalve', 'Electrónica'),
     (7, 'Juan Carlos Cobos', 'Electrónica'),
